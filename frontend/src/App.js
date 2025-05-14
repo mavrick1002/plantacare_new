@@ -13,6 +13,7 @@ import DashboardPage from "./view/DashboardPage"
 import PlantCareSession from "./view/PlantCareSession"
 import WhichPlantQuiz from "./view/WhichPlantQuiz"
 import Notification from "./view/notification"
+import Diseases from "./view/Diseases"
 
 
 function App() {
@@ -33,6 +34,8 @@ function App() {
         <Route path='/session' element={<PlantCareSession />} />
         <Route path="/which-plant-quiz" element={<WhichPlantQuiz />} />
         <Route path='/notification' element={<Notification />} />
+        <Route path='/des' element={<Diseases/>} />
+        
       </Routes>
     </Router>
   )

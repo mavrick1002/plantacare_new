@@ -1,117 +1,110 @@
-import React, { useEffect, useState } from "react"
-import axios from "../api/axios"
-import EditProfile from "./EditProfile"
-import { Link } from "react-router-dom"
+import React, { useEffect, useState } from "react";
+import axios from "../api/axios";
+import EditProfile from "./EditProfile";
+import { Link } from "react-router-dom";
+
 
 const UserProfile = () => {
-  const [user, setUser] = useState({})
-  const [isEditing, setIsEditing] = useState(false)
-  const [sharedPosts, setSharedPosts] = useState([])
+  const [user, setUser] = useState({});
+  const [isEditing, setIsEditing] = useState(false);
+  const [sharedPosts, setSharedPosts] = useState([]);
   const [preferences, setPreferences] = useState({
     eventNotifications: true,
     featureUpdates: true,
-  })
-  const [loadingPreferences, setLoadingPreferences] = useState(true)
+  });
+  const [loadingPreferences, setLoadingPreferences] = useState(true);
 
+  // Updated to use axios consistently with the rest of the code
   const updateUser = async (updatedUser) => {
     try {
-      const token = localStorage.getItem("authToken")
-      const response = await fetch("/api/users/profile", {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(updatedUser),
-      })
+      const token = localStorage.getItem("authToken");
+      const response = await axios.put("/users/profile", updatedUser, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-      const data = await response.json()
-
-      if (!response.ok) {
-        console.error("Error updating profile:", data.message)
-        return
+      if (response.data) {
+        setUser(response.data.user);
+        setIsEditing(false);
       }
-
-      setUser(data.user)
-      setIsEditing(false)
     } catch (error) {
-      console.error("Error updating profile:", error)
+      console.error(
+        "Error updating profile:",
+        error.response?.data?.message || error.message
+      );
     }
-  }
+  };
 
   // Fetch user profile
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const token = localStorage.getItem("authToken")
+        const token = localStorage.getItem("authToken");
         const response = await axios.get("/users/profile", {
           headers: { Authorization: `Bearer ${token}` },
-        })
-        setUser(response.data)
+        });
+        setUser(response.data);
       } catch (error) {
         console.error(
           "Error fetching user profile:",
           error.response?.data || error.message
-        )
+        );
       }
-    }
-    fetchUserProfile()
-  }, [])
+    };
+    fetchUserProfile();
+  }, []);
 
   // Fetch shared posts
   useEffect(() => {
     const fetchSharedPosts = async () => {
       try {
-        const token = localStorage.getItem("authToken")
+        const token = localStorage.getItem("authToken");
         const response = await axios.get("/posts/shared", {
           headers: { Authorization: `Bearer ${token}` },
-        })
-        setSharedPosts(response.data.posts)
+        });
+        setSharedPosts(response.data.posts);
       } catch (error) {
         console.error(
           "Error fetching shared posts:",
           error.response?.data || error.message
-        )
+        );
       }
-    }
-    fetchSharedPosts()
-  }, [])
+    };
+    fetchSharedPosts();
+  }, []);
 
   // Fetch email preferences
   useEffect(() => {
     const fetchPreferences = async () => {
       try {
-        const token = localStorage.getItem("authToken")
+        const token = localStorage.getItem("authToken");
         const response = await axios.get("/users/preferences", {
           headers: { Authorization: `Bearer ${token}` },
-        })
-        setPreferences(response.data.preferences)
-        setLoadingPreferences(false)
+        });
+        setPreferences(response.data.preferences);
+        setLoadingPreferences(false);
       } catch (error) {
-        console.error("Error fetching preferences:", error.message)
-        setLoadingPreferences(false)
+        console.error("Error fetching preferences:", error.message);
+        setLoadingPreferences(false);
       }
-    }
-    fetchPreferences()
-  }, [])
+    };
+    fetchPreferences();
+  }, []);
 
   const handleUpdatePreferences = async () => {
     try {
-      const token = localStorage.getItem("authToken")
+      const token = localStorage.getItem("authToken");
       await axios.put("/users/preferences", preferences, {
         headers: { Authorization: `Bearer ${token}` },
-      })
-      alert("Preferences updated!")
+      });
+      alert("Preferences updated!");
     } catch (error) {
-      console.error("Error updating preferences:", error.message)
+      console.error("Error updating preferences:", error.message);
     }
-  }
+  };
 
   if (isEditing) {
-    return <EditProfile user={user} updateUser={updateUser} />
+    return <EditProfile user={user} updateUser={updateUser} />;
   }
-
-  console.log("User Profile:", user)
-  console.log("Shared Posts:", sharedPosts)
 
   return (
       <div className='p-6 min-h-screen bg-gray-100'>
@@ -167,140 +160,167 @@ const UserProfile = () => {
             </div>
           </div>
         </nav>
-  
 
-      {/* Profile Section */}
-      <div className='flex-grow flex mt-32 items-center justify-center'>
-        <div className='max-w-md w-full bg-white bg-opacity-90 rounded-lg shadow-lg overflow-hidden'>
-          <div className='bg-green-200 p-6 text-center'>
-            <img
-              src={"https://cdn-icons-png.flaticon.com/512/1253/1253756.png"}
-              alt='User Avatar'
-              className='w-24 h-24 mx-auto rounded-full border-4 border-green-400'
-            />
-            <h2 className='text-2xl font-bold text-green-800 mt-2'>
-              {user.name}
-            </h2>
-          </div>
-          <div className='p-6'>
-            <h3 className='text-lg font-medium text-green-800'>
-              Contact Information
-            </h3>
-            <p className='text-sm text-gray-700'>
-              <strong>Email:</strong> {user.email}
-            </p>
-            <p className='text-sm text-gray-700'>
-              <strong>Phone:</strong> {user.phone || "N/A"}
-            </p>
-            <p className='text-sm text-gray-700'>
-              <strong>Address:</strong> {user.address || "N/A"}
-            </p>
-          </div>
-          <div className='bg-green-100 p-4 text-center'>
-            <button
-              className='bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition'
-              onClick={() => setIsEditing(true)}
-            >
-              Edit Profile
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Shared Posts Section */}
-      <h2 className='text-xl font-bold mt-8 px-6'>Shared Posts</h2>
-      {sharedPosts.length > 0 ? (
-        sharedPosts.map((post) => (
-          <div className='flex flex-col items-center'>
-            <div
-              key={post._id}
-              className='bg-white shadow-lg rounded-lg mb-6 w-2/3'
-            >
-              <div className='p-4'>
-                <div className='flex items-center mb-2'>
-                  <img
-                    src={"https://via.placeholder.com/40"}
-                    alt='User'
-                    className='w-10 h-10 rounded-full'
-                  />
-                  <div className='ml-4'>
-                    <h3 className='font-bold'>{user.name}</h3>
-                    <p className='text-sm text-gray-500'>
-                      {post.isShared && (
-                        <span className='text-gray-400'>
-                          Shared from {post.sharedFrom} •{" "}
-                        </span>
-                      )}
-                      {new Date(post.createdAt).toLocaleDateString()}
-                    </p>
-                  </div>
-                </div>
-                {post.photo && (
-                  <div className='w-full flex justify-center'>
-                    <img
-                      src={post.photo}
-                      alt='Post'
-                      className='w-auto h-64 object-cover mt-4 rounded-lg'
-                    />
-                  </div>
-                )}
-                <p className='mt-4'>{post.text}</p>
+      <div className="container mx-auto px-4 py-8">
+        {/* Profile Section */}
+        <div className="flex items-center justify-center mt-8">
+          <div className="max-w-md w-full bg-white rounded-lg shadow-lg overflow-hidden">
+            <div className="bg-green-200 p-6 text-center">
+              <img
+                src={
+                  user.photo ||
+                  "https://cdn-icons-png.flaticon.com/512/1253/1253756.png"
+                }
+                alt="User Avatar"
+                className="w-24 h-24 mx-auto rounded-full border-4 border-green-400 object-cover"
+              />
+              <h2 className="text-2xl font-bold text-green-800 mt-2">
+                {user.name || "User Name"}
+              </h2>
+            </div>
+            <div className="p-6">
+              <h3 className="text-lg font-medium text-green-800 mb-3">
+                Contact Information
+              </h3>
+              <div className="space-y-2">
+                <p className="text-gray-700 flex items-center">
+                  <span className="font-semibold w-20">Email:</span>
+                  <span>{user.email || "Not available"}</span>
+                </p>
+                {/* <p className="text-gray-700 flex items-center">
+                  <span className="font-semibold w-20">Phone:</span>
+                  <span>{user.phone || "Not available"}</span>
+                </p>
+                <p className="text-gray-700 flex items-center">
+                  <span className="font-semibold w-20">Address:</span>
+                  <span>{user.address || "Not available"}</span>
+                </p> */}
               </div>
             </div>
+            <div className="bg-green-100 p-4 text-center">
+              <button
+                className="bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+                onClick={() => setIsEditing(true)}
+              >
+                Edit Profile
+              </button>
+            </div>
           </div>
-        ))
-      ) : (
-        <p className='px-6 text-gray-700'>No shared posts to display yet!</p>
-      )}
+        </div>
 
-      {/* Notification Preferences */}
-      <div className='max-w-md mx-auto mt-8 bg-white shadow-md rounded-lg p-6'>
-        <h3 className='text-xl font-semibold mb-4'>
-          Email Notifications Preferences
-        </h3>
-        {loadingPreferences ? (
-          <p>Loading preferences...</p>
-        ) : (
-          <div>
-            <label className='block mb-4'>
-              <input
-                type='checkbox'
-                checked={preferences.eventNotifications}
-                onChange={() =>
-                  setPreferences((prev) => ({
-                    ...prev,
-                    eventNotifications: !prev.eventNotifications,
-                  }))
-                }
-                className='mr-2'
-              />
-              Receive event notifications
-            </label>
-            <label className='block mb-4'>
-              <input
-                type='checkbox'
-                checked={preferences.featureUpdates}
-                onChange={() =>
-                  setPreferences((prev) => ({
-                    ...prev,
-                    featureUpdates: !prev.featureUpdates,
-                  }))
-                }
-                className='mr-2'
-              />
-              Receive feature updates
-            </label>
-            <button
-              onClick={handleUpdatePreferences}
-              className='bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700'
-            >
-              Save Preferences
-            </button>
-          </div>
-        )}
+        {/* Notification Preferences */}
+        <div className="max-w-md mx-auto mt-8 bg-white shadow-lg rounded-lg p-6">
+          <h3 className="text-xl font-semibold mb-4 text-green-800">
+            Email Notifications
+          </h3>
+          {loadingPreferences ? (
+            <p className="text-gray-600">Loading preferences...</p>
+          ) : (
+            <div className="space-y-4">
+              <label className="flex items-center space-x-3 py-2 px-3 rounded hover:bg-green-50 transition">
+                <input
+                  type="checkbox"
+                  checked={preferences.eventNotifications}
+                  onChange={() =>
+                    setPreferences((prev) => ({
+                      ...prev,
+                      eventNotifications: !prev.eventNotifications,
+                    }))
+                  }
+                  className="form-checkbox h-5 w-5 text-green-600"
+                />
+                <span>Receive event notifications</span>
+              </label>
+              <label className="flex items-center space-x-3 py-2 px-3 rounded hover:bg-green-50 transition">
+                <input
+                  type="checkbox"
+                  checked={preferences.featureUpdates}
+                  onChange={() =>
+                    setPreferences((prev) => ({
+                      ...prev,
+                      featureUpdates: !prev.featureUpdates,
+                    }))
+                  }
+                  className="form-checkbox h-5 w-5 text-green-600"
+                />
+                <span>Receive feature updates</span>
+              </label>
+              <div className="pt-2">
+                <button
+                  onClick={handleUpdatePreferences}
+                  className="w-full bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-green-500"
+                >
+                  Save Preferences
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Shared Posts Section */}
+        <div className="mt-10">
+          <h2 className="text-2xl font-bold mb-6 text-green-800 text-center">
+            My Shared Posts
+          </h2>
+          {sharedPosts.length > 0 ? (
+            <div className="flex flex-col items-center space-y-6">
+              {sharedPosts.map((post) => (
+                <div
+                  key={post._id}
+                  className="bg-white shadow-lg rounded-lg overflow-hidden w-full max-w-2xl transition-all hover:shadow-xl"
+                >
+                  <div className="p-5">
+                    <div className="flex items-center mb-4">
+                      <img
+                        src={
+                          user.photo ||
+                          "https://cdn-icons-png.flaticon.com/512/1253/1253756.png"
+                        }
+                        alt="User"
+                        className="w-12 h-12 rounded-full object-cover border-2 border-green-200"
+                      />
+                      <div className="ml-4">
+                        <h3 className="font-bold text-green-800">
+                          {user.name}
+                        </h3>
+                        <p className="text-sm text-gray-500">
+                          {post.isShared && (
+                            <span className="text-gray-400">
+                              Shared from {post.sharedFrom} •
+                            </span>
+                          )}{" "}
+                          {new Date(post.createdAt).toLocaleDateString()}
+                        </p>
+                      </div>
+                    </div>
+
+                    <p className="text-gray-700 mb-4">{post.text}</p>
+
+                    {post.photo && (
+                      <div className="w-full flex justify-center">
+                        <img
+                          src={post.photo}
+                          alt="Post"
+                          className="w-full h-auto max-h-80 object-cover rounded-lg"
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="bg-white rounded-lg shadow-md p-8 text-center max-w-md mx-auto">
+              <p className="text-gray-700">You haven't shared any posts yet!</p>
+              <button className="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
+                Create Your First Post
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default UserProfile
+export default UserProfile;

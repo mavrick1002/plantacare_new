@@ -41,6 +41,7 @@ app.use("/api/checkout", checkoutRoutes);
 app.use("/api/", transactionRoutes);
 app.use("/api/posts", postRoutes);
 
+
 // Schedule the task to run daily at midnight
 cron.schedule("0 0 * * *", async () => {
   try {

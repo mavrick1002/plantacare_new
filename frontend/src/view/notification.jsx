@@ -24,7 +24,7 @@ const Notification = () => {
                     postedAt: new Date().toLocaleTimeString(),
                 },
             ]);
-        }, 120000); // 2 minutes
+        }, 120); // 
 
         return () => clearTimeout(timer);
     }, []);

@@ -134,7 +134,7 @@ const PlantList = () => {
             <Link to="/marketplace" className="hover:underline">Marketplace</Link>
             <Link to="/profile" className="hover:underline">User</Link>
             <Link to="/session" className="hover:underline">Session</Link>
-            <Link to="/" className="hover:underline">Logout</Link>
+            <Link to="/" className="hover:underline">logout</Link>
             <Link to="/notification" className="hover:underline">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
                 viewBox="0 0 24 24" stroke="currentColor">

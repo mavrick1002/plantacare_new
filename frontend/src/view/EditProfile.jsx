@@ -1,6 +1,5 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { Link } from "react-router-dom"
-
 
 const EditProfile = ({ user, updateUser }) => {
   const [editedUser, setEditedUser] = useState({ ...user })
@@ -10,9 +9,14 @@ const EditProfile = ({ user, updateUser }) => {
     setEditedUser((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    updateUser(editedUser)
+    if (typeof updateUser === "function") {
+      await updateUser(editedUser)
+      alert("Profile updated successfully!")
+    } else {
+      alert("Update function not provided.")
+    }
     console.log("Updated Profile:", editedUser)
   }
 
