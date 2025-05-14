@@ -1,3 +1,5 @@
+// backend -- routes-- notifications.js
+
 const express = require("express");
 const Plant = require("../models/plant");
 const protect = require("../middleware/authMiddleware");
@@ -5,37 +7,29 @@ const router = express.Router();
 
 router.get("/", protect, async (req, res) => {
   try {
-    const today = new Date();
+    const now = new Date();
     const plants = await Plant.find({ userId: req.userId });
 
     const notifications = plants.map((plant) => {
-      const { name, lastWatered, lastFertilized, lastPruned, waterInterval, fertilizeInterval, pruneInterval } = plant;
+      const { name, lastWatered, lastFertilized } = plant;
       const messages = [];
 
-      // Check watering schedule
+      // 2 minutes in milliseconds
+      const intervalMs = 2 * 60 * 1000;
+
+      // Water notification
       if (lastWatered) {
-        const nextWatering = new Date(lastWatered);
-        nextWatering.setDate(nextWatering.getDate() + waterInterval);
-        if (today >= nextWatering) {
-          messages.push(`Time to water your plant "${name}".`);
+        const lastWateredDate = new Date(lastWatered);
+        if (now - lastWateredDate >= intervalMs) {
+          messages.push(`It's time to water your plant "${name}"!`);
         }
       }
 
-      // Check fertilizing schedule
+      // Fertilizer notification
       if (lastFertilized) {
-        const nextFertilizing = new Date(lastFertilized);
-        nextFertilizing.setDate(nextFertilizing.getDate() + fertilizeInterval);
-        if (today >= nextFertilizing) {
-          messages.push(`Time to fertilize your plant "${name}".`);
-        }
-      }
-
-      // Check pruning schedule
-      if (lastPruned) {
-        const nextPruning = new Date(lastPruned);
-        nextPruning.setDate(nextPruning.getDate() + pruneInterval);
-        if (today >= nextPruning) {
-          messages.push(`Time to prune your plant "${name}".`);
+        const lastFertilizedDate = new Date(lastFertilized);
+        if (now - lastFertilizedDate >= intervalMs) {
+          messages.push(`It's time to fertilize your plant "${name}"!`);
         }
       }
 

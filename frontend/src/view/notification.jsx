@@ -1,20 +1,33 @@
-import React from 'react';
+//src--> view-->notification.jsx
+
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Notification = () => {
-    // Define a sample notifications array
-    const notifications = [
-        {
-            image: 'https://via.placeholder.com/150',
-            title: 'Water Reminder',
-            message: 'Don’t forget to water your plants today!',
-        },
-        {
-            image: 'https://via.placeholder.com/150',
-            title: 'New Plant Care Tips',
-            message: 'Check out our latest tips for keeping your plants healthy.',
-        },
-    ];
+    // Initial notifications (can be empty or your static ones)
+    const [notifications, setNotifications] = useState([
+        // ...existing static notifications if needed
+    ]);
+
+    useEffect(() => {
+        // Simulate a notification after 2 minutes (120000 ms)
+        const timer = setTimeout(() => {
+            setNotifications((prev) => [
+                ...prev,
+                {
+                    image: 'https://via.placeholder.com/150',
+                    title: 'Water & Fertilizer Reminder',
+                    message: `Posted by Admin. Water your plant at 10:00 AM and fertilize at 6:00 PM.`,
+                    postedBy: 'Admin',
+                    waterTime: '10:00 AM',
+                    fertilizerTime: '6:00 PM',
+                    postedAt: new Date().toLocaleTimeString(),
+                },
+            ]);
+        }, 120000); // 2 minutes
+
+        return () => clearTimeout(timer);
+    }, []);
 
     return (
         <div className='p-6 min-h-screen bg-gray-100'>
@@ -75,6 +88,9 @@ const Notification = () => {
                 Stay updated with the latest news and updates from Plant Care.
             </p>
             <div className='notification-list max-w-4xl mx-auto'>
+                {notifications.length === 0 && (
+                    <p className="text-center text-gray-500">No notifications yet. Please wait...</p>
+                )}
                 {notifications.map((notification, index) => (
                     <div
                         key={index}
@@ -89,33 +105,18 @@ const Notification = () => {
                             <h2 className='text-xl font-semibold text-green-800 mb-2'>
                                 {notification.title}
                             </h2>
-                            <p className='text-gray-700'>{notification.message}</p>
+                            <p className='text-gray-700 mb-1'>{notification.message}</p>
+                            {notification.postedBy && (
+                                <p className='text-sm text-gray-500'>
+                                    Posted by: {notification.postedBy} | Water: {notification.waterTime} | Fertilizer: {notification.fertilizerTime} | At: {notification.postedAt}
+                                </p>
+                            )}
                         </div>
                     </div>
                 ))}
             </div>
         </div>
     );
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+};
 
 export default Notification;
