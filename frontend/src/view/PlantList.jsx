@@ -1,6 +1,3 @@
-// delete button added at 13/5 8 pm
-
-
 import React, { useState, useEffect } from "react";
 import axios from "../api/axios";
 import { Link } from "react-router-dom";
