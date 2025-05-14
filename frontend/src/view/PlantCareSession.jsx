@@ -28,24 +28,41 @@ const PlantCareSession = () => {
   ];
 
   return (
-    <div className="plant-care-session bg-green-5 p-0 min-h-screen">
-      {/* Navigation Bar */}
-      <nav className="bg-green-900 pt-8 text-white">
-        <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-          <h1 className="text-xl font-bold">
-            <Link to="/">Plant Care</Link>
-          </h1>
-          <div className="flex space-x-4">
-            <Link to="/home" className="hover:underline">Home</Link>
-            <Link to="/research-work" className="hover:underline">Research</Link>
-            <Link to="/video-tutorials" className="hover:underline">Tutorials</Link>
-            <Link to="/plants" className="hover:underline">Plants</Link>
-            <Link to="/marketplace" className="hover:underline">MarketplacePage</Link>
-            <Link to="/profile" className="hover:underline">User</Link>
-            <Link to="/session" className="hover:underline">Session</Link>
-          </div>
-        </div>
-      </nav>
+    <div className="p-6">
+          <nav className='bg-green-900 -m-8 pt-8 text-white'>
+                  <div className='container mx-auto px-4 py-3 flex justify-between items-center'>
+                    <h1 className='text-xl font-bold'>
+                      <Link to='/home'>Plant Care</Link>
+                    </h1>
+                    <div className='flex space-x-4'>
+                      <Link to='/home' className='hover:underline'>
+                        Home
+                      </Link>
+                      <Link to='/research-work' className='hover:underline'>
+                        Research
+                      </Link>
+                      <Link to='/video-tutorials' className='hover:underline'>
+                        Tutorials
+                      </Link>
+                      <Link to='/plants' className='hover:underline'>
+                        Plants
+                      </Link>
+                      <Link to='/marketplace' className='hover:underline'>
+                        MarketplacePage
+                      </Link>
+                      <Link to='/profile' className='hover:underline'>
+                        User
+                      </Link>
+                      <Link to='/session' className='hover:underline'>
+                        Session
+                      </Link>
+                      <Link to='/' className='hover:underline'>
+                        logout
+                      </Link>
+          
+                    </div>
+                  </div>
+                </nav>
 
       <h1 className="text-3xl font-bold text-green-800 text-center mb-8 mt-16">
         Plant Care Session

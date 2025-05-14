@@ -1,17 +1,19 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import LoginPage from "./pages/LoginPage"
-import SignUpPage from "./pages/SignUpPage"
-import UserProfile from "./pages/UserProfile"
-import PlantProfile from "./pages/PlantProfile"
-import EditPlantProfile from "./pages/EditPlantProfile"
-import ResearchWork from "./pages/ResearchWork"
-import VideoTutorials from "./pages/VideoTutorials"
-import MarketplacePage from "./pages/MarketplacePage"
-import PlantList from "./pages/PlantList"
-import TransactionPage from "./pages/TransactionPage"
-import DashboardPage from "./pages/DashboardPage"
-import PlantCareSession from "./pages/PlantCareSession"
-import WhichPlantQuiz from "./pages/WhichPlantQuiz"
+import LoginPage from "./view/LoginPage"
+import SignUpPage from "./view/SignUpPage"
+import UserProfile from "./view/UserProfile"
+import PlantProfile from "./view/PlantProfile"
+import EditPlantProfile from "./view/EditPlantProfile"
+import ResearchWork from "./view/ResearchWork"
+import VideoTutorials from "./view/VideoTutorials"
+import MarketplacePage from "./view/MarketplacePage"
+import PlantList from "./view/PlantList"
+import TransactionPage from "./view/TransactionPage"
+import DashboardPage from "./view/DashboardPage"
+import PlantCareSession from "./view/PlantCareSession"
+import WhichPlantQuiz from "./view/WhichPlantQuiz"
+import Notification from "./view/notification"
+
 
 function App() {
   return (
@@ -30,6 +32,7 @@ function App() {
         <Route path='/transaction' element={<TransactionPage />} />
         <Route path='/session' element={<PlantCareSession />} />
         <Route path="/which-plant-quiz" element={<WhichPlantQuiz />} />
+        <Route path='/notification' element={<Notification />} />
       </Routes>
     </Router>
   )
