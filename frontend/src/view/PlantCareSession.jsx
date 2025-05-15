@@ -39,7 +39,7 @@ return (
             <Link to="/research-work" className="hover:underline">Research</Link>
             <Link to="/video-tutorials" className="hover:underline">Tutorials</Link>
             <Link to="/plants" className="hover:underline">Plants</Link>
-            <Link to="/marketplace" className="hover:underline">Marketplace</Link>
+            <Link to="/marketplace" className="hover:underline">MarketplacePage</Link>
             <Link to="/profile" className="hover:underline">User</Link>
             <Link to="/session" className="hover:underline">Session</Link>
             <Link to="/" className="hover:underline">logout</Link>

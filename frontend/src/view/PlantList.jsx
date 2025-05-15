@@ -131,7 +131,7 @@ const PlantList = () => {
             <Link to="/research-work" className="hover:underline">Research</Link>
             <Link to="/video-tutorials" className="hover:underline">Tutorials</Link>
             <Link to="/plants" className="hover:underline">Plants</Link>
-            <Link to="/marketplace" className="hover:underline">Marketplace</Link>
+            <Link to="/marketplace" className="hover:underline">MarketplacePage</Link>
             <Link to="/profile" className="hover:underline">User</Link>
             <Link to="/session" className="hover:underline">Session</Link>
             <Link to="/" className="hover:underline">logout</Link>
@@ -184,6 +184,15 @@ const PlantList = () => {
           >
            tips? 
 
+
+          </Link>
+        </div>
+ <div className="text-2xl mt-0 text-right mb-10">
+          <Link
+            to="/des"
+            className="bg-green-600 text-white px-2 py-1 rounded hover:bg-green-700 transition"
+          >
+          sick tree?
 
           </Link>
         </div>
