@@ -362,8 +362,8 @@ const DashboardPage = () => {
             <div className='p-4'>
               <div className='flex items-center mb-2'>
                 <img
-                  src={"https://static.vecteezy.com/system/resources/thumbnails/005/346/410/small_2x/close-up-portrait-of-smiling-handsome-young-caucasian-man-face-looking-at-camera-on-isolated-light-gray-studio-background-photo.jpg"}
-                  alt='User'
+                  src={""}
+                  alt=''
                   className='w-10 h-10 rounded-full'
                 />
                 <div className='ml-4'>

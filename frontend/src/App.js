@@ -14,6 +14,7 @@ import PlantCareSession from "./view/PlantCareSession"
 import WhichPlantQuiz from "./view/WhichPlantQuiz"
 import Notification from "./view/notification"
 import Diseases from "./view/Diseases"
+import Shabibaplant from "./view/shabibaplant"
 
 
 function App() {
@@ -35,7 +36,8 @@ function App() {
         <Route path="/which-plant-quiz" element={<WhichPlantQuiz />} />
         <Route path='/notification' element={<Notification />} />
         <Route path='/des' element={<Diseases/>} />
-        
+        <Route path='/shabibaplant' element={<Shabibaplant />} />
+      
       </Routes>
     </Router>
   )

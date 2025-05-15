@@ -168,6 +168,40 @@ const PlantList = () => {
         </button>
       </div>
 
+
+
+
+
+
+
+
+
+
+ <div className="text-2xl mt-4 text-left mb-10">
+          <Link
+            to="/shabibaplant"
+            className="bg-green-600 text-white px-4 py-1 rounded hover:bg-green-700 transition"
+          >
+           tips? 
+
+
+          </Link>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       {showForm && (
         <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md mb-6">
           <h2 className="text-xl font-bold mb-4">
