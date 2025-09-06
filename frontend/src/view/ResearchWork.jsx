@@ -26,7 +26,7 @@ const ResearchWork = () => {
   ];
 
  return (
-     <div className='p-6 min-h-screen bg-gray-100'>
+     <div className='bg-gradient-to-r from-green-200 to-blue-300'>
        <nav className='bg-green-900 -m-8 pt-8 text-white'>
          <div className='container mx-auto px-4 py-3 flex justify-between items-center'>
            <h1 className='text-xl font-bold'>

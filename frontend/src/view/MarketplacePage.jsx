@@ -206,7 +206,7 @@ const MarketplacePage = () => {
               <div key={plant.id} className="border border-green-300 rounded-md p-4 text-center">
                 <img src={plant.image} alt={plant.name} className="w-24 h-24 mx-auto" />
                 <h3 className="mt-2 font-semibold text-green-800">{plant.name}</h3>
-                <p className="text-green-700">${plant.price}</p>
+                <p className="text-green-700">৳{plant.price}</p>
                 <button
                   onClick={() => addToCart(plant)}
                   className="mt-2 bg-green-600 text-white py-1 px-4 rounded hover:bg-green-700 transition"

@@ -12,7 +12,7 @@ const VideoTutorials = ({ navigate }) => {
   ];
 
   return (
-      <div className='p-6 min-h-screen bg-gray-100'>
+      <div className='bg-gradient-to-r from-green-200 to-blue-300'>
         <nav className='bg-green-900 -m-8 pt-8 text-white'>
           <div className='container mx-auto px-4 py-3 flex justify-between items-center'>
             <h1 className='text-xl font-bold'>
@@ -67,7 +67,7 @@ const VideoTutorials = ({ navigate }) => {
         </nav>
   
       {/* Page Title */}
-      <h1 className="text-2xl font-bold text-center mt-16 text-green-800">
+      <h1 className="text-3xl font-bold text-center mt-16 text-green-800">
         Video Tutorials
       </h1>
 
@@ -97,7 +97,12 @@ const VideoTutorials = ({ navigate }) => {
           Find more on Youtube
         </button>
       </div>
+
+
+
+      
     </div>
+
   );
 };
 

@@ -14,8 +14,9 @@ import PlantCareSession from "./view/PlantCareSession"
 import WhichPlantQuiz from "./view/WhichPlantQuiz"
 import Notification from "./view/notification"
 import Diseases from "./view/Diseases"
-import Shabibaplant from "./view/shabibaplant"
-
+import ProTips from "./view/ProTips"
+import PlantMoodMatcher from "./view/Moodchanger"
+import CommunityForumPage from "./view/CommunityForum"
 
 function App() {
   return (
@@ -36,7 +37,10 @@ function App() {
         <Route path="/which-plant-quiz" element={<WhichPlantQuiz />} />
         <Route path='/notification' element={<Notification />} />
         <Route path='/des' element={<Diseases/>} />
-        <Route path='/shabibaplant' element={<Shabibaplant />} />
+        <Route path='/protips' element={<ProTips />} />
+        <Route path='/mood' element={<PlantMoodMatcher />} />
+        <Route path='/community' element={<CommunityForumPage />} />
+        {/* Add more routes as needed */}
       
       </Routes>
     </Router>

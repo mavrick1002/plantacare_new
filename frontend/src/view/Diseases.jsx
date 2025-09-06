@@ -65,7 +65,7 @@ function PlantDiseaseDetector() {
                         <Link to='/h'>Plant Care</Link>
                     </h1>
                     <div className='flex space-x-4'>
-                        <Link to="/" className="hover:underline">Home</Link>
+                        <Link to="/home" className="hover:underline">Home</Link>
                                     <Link to="/research-work" className="hover:underline">Research</Link>
                                     <Link to="/video-tutorials" className="hover:underline">Tutorials</Link>
                                     <Link to="/plants" className="hover:underline">Plants</Link>

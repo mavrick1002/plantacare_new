@@ -120,14 +120,14 @@ const PlantList = () => {
   };
 
   return (
-    <div className="p-6 min-h-screen bg-gray-100">
+    <div className="bg-gradient-to-r from-green-200 to-blue-300">
       <nav className="bg-green-900 -m-8 pt-8 text-white">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           <h1 className="text-xl font-bold">
             <Link to="/">Plant Care</Link>
           </h1>
           <div className="flex space-x-4">
-            <Link to="/" className="hover:underline">Home</Link>
+            <Link to="/home" className="hover:underline">Home</Link>
             <Link to="/research-work" className="hover:underline">Research</Link>
             <Link to="/video-tutorials" className="hover:underline">Tutorials</Link>
             <Link to="/plants" className="hover:underline">Plants</Link>
@@ -162,7 +162,7 @@ const PlantList = () => {
               image: null,
             });
           }}
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+          className="bg-green-600 text-white px-10 py-5 rounded hover:bg-green-700"
         >
           {showForm ? "Close Form" : "Add Plant"}
         </button>
@@ -177,25 +177,38 @@ const PlantList = () => {
 
 
 
- <div className="text-2xl mt-4 text-left mb-10">
+ <div className="text-3xl mt-2 text-right mb-10">
           <Link
-            to="/shabibaplant"
+            to="/Protips"
             className="bg-green-600 text-white px-4 py-1 rounded hover:bg-green-700 transition"
           >
-           tips? 
+           tips? 💡
 
 
           </Link>
         </div>
- <div className="text-2xl mt-0 text-right mb-10">
+ <div className="text-3xl mt-0 text-right mb-10">
           <Link
             to="/des"
             className="bg-green-600 text-white px-2 py-1 rounded hover:bg-green-700 transition"
           >
-          sick tree?
+          sick tree? 🍂
 
           </Link>
         </div>
+
+
+
+ <div className="text-3xl mt-10 text-right mb-10">
+          <Link
+            to="/mood"
+            className="bg-green-600 text-white px-4 py-1 rounded hover:bg-green-700 transition"
+          >
+           Choose your plant 😀 
+
+
+          </Link>
+        </div>        
 
 
 
@@ -262,10 +275,11 @@ const PlantList = () => {
             />
           </div>
           <button
-            onClick={handleAddOrUpdatePlant}
+          
+            onClick={handleAddOrUpdatePlant}          //{/* Update this plant */}
             className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
           >
-            {isEditing ? "Update Plant" : "Add Plant"}
+            {isEditing ? "Update Plant" : "Add Plant"} 
           </button>
         </div>
       )}
@@ -287,13 +301,13 @@ const PlantList = () => {
             <p>Last Fertilized: {plant.lastFertilized ? new Date(plant.lastFertilized).toISOString().split('T')[0] : "Not yet"}</p>
             <div className="flex gap-2 mt-4">
               <button
-                onClick={() => handleEditPlant(plant)}
+                onClick={() => handleEditPlant(plant)}  //{/* Edit this plant */}
                 className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
               >
                 Edit
               </button>
               <button
-                onClick={() => handleDeletePlant(plant._id)}
+                onClick={() => handleDeletePlant(plant._id)} //{/* Delete this plant */}
                 className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
               >
                 Delete

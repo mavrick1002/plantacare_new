@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function PlantTips() {
     const tips = [
@@ -58,6 +59,7 @@ function PlantTips() {
                     Take your plant parenting skills to the next level! Follow these simple yet effective tips for vibrant, thriving plants.
                 </p>
             </div>
+            
 
             {/* Tips Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full max-w-7xl">
@@ -71,10 +73,22 @@ function PlantTips() {
                             <h2 className="text-2xl font-semibold text-green-800 mb-2">{tip.title}</h2>
                             <p className="text-green-700 text-base">{tip.description}</p>
                         </div>
+                        
                     </div>
                 ))}
+                
+            </div>
+            {/* Add button at the bottom */}
+            <div className="text-3xl mt-10 text-right mb-10 w-full max-w-7xl">
+                <Link
+                    to="/plants"
+                    className="bg-green-600 text-white px-4 py-1 rounded hover:bg-green-700 transition"
+                >
+                    Go to Previous Page
+                </Link>
             </div>
         </div>
+        
     );
 }
 

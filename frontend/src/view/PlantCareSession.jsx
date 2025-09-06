@@ -28,14 +28,16 @@ const PlantCareSession = () => {
   ];
 
 return (
-    <div className="p-6 min-h-screen bg-gray-100">
+    <div className="bg-gradient-to-r from-green-200 to-blue-300">
+
+      
       <nav className="bg-green-900 -m-8 pt-8 text-white">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           <h1 className="text-xl font-bold">
             <Link to="/">Plant Care</Link>
           </h1>
           <div className="flex space-x-4">
-            <Link to="/" className="hover:underline">Home</Link>
+            <Link to="/home" className="hover:underline">Home</Link>
             <Link to="/research-work" className="hover:underline">Research</Link>
             <Link to="/video-tutorials" className="hover:underline">Tutorials</Link>
             <Link to="/plants" className="hover:underline">Plants</Link>
@@ -53,6 +55,17 @@ return (
           </div>
         </div>
       </nav>
+ <div className="text-3xl mt-10 text-right mb-10">
+          <Link
+            to="/community"
+            className="bg-green-600 text-white px-4 py-1 rounded hover:bg-green-700 transition"
+          >
+           Join Our Community
+
+
+          </Link>
+        </div>        
+
 
       <h1 className="text-3xl font-bold text-green-800 text-center mb-8 mt-16">
         Plant Care Session
@@ -106,6 +119,10 @@ return (
           Back to Plant Profile
         </Link>
       </div>
+
+      
+
+
     </div>
   );
 };
